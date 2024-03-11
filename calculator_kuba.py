@@ -51,9 +51,9 @@ def calculation_history():
     for calculation in calculations:
         history_text.insert(tk.END, f"{calculation[0]} = {calculation[1]}\n")
         
-def save_to_csv(calculations ,  file_name = 'Calculation history.csv'):    
-    desktop_path = os.path.join(os.path.expanduser('~') , 'Desktop')
-    full_path = os.path.join(desktop_path , file_name)
+def save_to_csv(calculations ,  file_name = 'Calculation history.csv'):
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    full_path = os.path.join(current_directory , file_name)
     with open(full_path , 'w') as csvfile:
         csv_writer = csv.writer(csvfile)
         for expression , result in calculations:
