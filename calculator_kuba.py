@@ -1,6 +1,9 @@
 import os
+import csv
 from dotenv import load_dotenv
 import tkinter as tk
+
+calculations = []
 
 load_dotenv()  
 name = os.getenv('IMIE')
@@ -39,15 +42,33 @@ def add_dot():
     current_text = entry.get()
     if '.' not in current_text:
         entry.insert(tk.END , '.')
+        
+def calculation_history():
+    history_window = tk.Toplevel(root)
+    history_window.title("Calculation history:")
+    history_text = tk.Text(history_window)
+    history_text.pack(expand=True, fill=tk.BOTH)
+    for calculation in calculations:
+        history_text.insert(tk.END, f"{calculation[0]} = {calculation[1]}\n")
+        
+def save_to_csv(calculations ,  file_name = 'Calculation history.csv'):
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    full_path = os.path.join(current_directory , file_name)
+    with open(full_path , 'w') as csvfile:
+        csv_writer = csv.writer(csvfile)
+        for expression , result in calculations:
+            csv_writer.writerow([f"{expression}={result}"])
 
 entry = tk.Entry(root)
 entry.pack(side = tk.TOP , expand = True , fill = tk.BOTH)
 
 def results():
     try:
-        result = eval(entry.get())
+        expression = entry.get()
+        result = eval(expression)
         entry.delete(0 , tk.END)
         entry.insert(tk.END , result)
+        calculations.append((expression, result))
     except Exception as e:
         entry.delete(0 , tk.END)
         entry.insert(tk.END , f'Error: {e}')
@@ -58,9 +79,11 @@ button = [
         ('7','8','9'),
         ('0'),
         ('+','-'),
-        ('*','/'),
-        ('mod','pow'),
-        ('.','ac','=')
+        ('* ','/'),
+        ('modulo','  power'),
+        ('.','ac','='),
+        ('history',),
+        ('download history to csv.',)
 ]
 
 for row in button:
@@ -79,9 +102,25 @@ for row in button:
         elif button_text == 'ac':
             btn = tk.Button(button_frame, text=button_text, command=clear)
             btn.pack(side = tk.LEFT , expand = True , fill = tk.BOTH)
-        
-        elif button_text in ('+','-' ,'*','/','mod','pow'):
+            
+        elif button_text == 'history':
+            btn = tk.Button(button_frame , text=button_text , command=calculation_history)
+            btn.pack(side = tk.LEFT , expand = True , fill = tk.BOTH)
+            
+        elif button_text == 'download history to csv. on desktop':
+            btn = tk.Button(button_frame , text=button_text , command = lambda: save_to_csv(calculations))
+            btn.pack(side = tk.LEFT , expand = True , fill = tk.BOTH)
+                    
+        elif button_text in ('+','-' ,'* ','/'):
             btn = tk.Button(button_frame , text = button_text , command = lambda op=button_text: add_digit(op))
+            btn.pack(side = tk.LEFT , expand = True , fill = tk.BOTH)
+            
+        elif button_text in ('modulo'):
+            btn = tk.Button(button_frame , text = button_text , command = lambda op="%": add_digit(op))
+            btn.pack(side = tk.LEFT , expand = True , fill = tk.BOTH)
+            
+        elif button_text in ('  power'):
+            btn = tk.Button(button_frame , text = button_text , command = lambda op="**": add_digit(op))
             btn.pack(side = tk.LEFT , expand = True , fill = tk.BOTH)
         
         else:
