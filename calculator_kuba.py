@@ -83,7 +83,7 @@ button = [
         ('modulo','  power'),
         ('.','ac','='),
         ('history',),
-        ('download history to csv. on desktop',)
+        ('download history to csv.',)
 ]
 
 for row in button:
