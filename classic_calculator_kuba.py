@@ -3,7 +3,7 @@ import csv
 from dotenv import load_dotenv
 import tkinter as tk
 
-calculations = []
+classic_calculator_history = []
 
 load_dotenv()  
 name = os.getenv('IMIE')
@@ -48,15 +48,15 @@ def calculation_history():
     history_window.title("Calculation history:")
     history_text = tk.Text(history_window)
     history_text.pack(expand=True, fill=tk.BOTH)
-    for calculation in calculations:
+    for calculation in classic_calculator_history:
         history_text.insert(tk.END, f"{calculation[0]} = {calculation[1]}\n")
         
-def save_to_csv(calculations ,  file_name = 'Calculation history.csv'):
+def save_to_csv(classic_calculator_history ,  file_name = 'Calculation history.csv'):
     current_directory = os.path.dirname(os.path.abspath(__file__))
     full_path = os.path.join(current_directory , file_name)
     with open(full_path , 'w') as csvfile:
         csv_writer = csv.writer(csvfile)
-        for expression , result in calculations:
+        for expression , result in classic_calculator_history:
             csv_writer.writerow([f"{expression}={result}"])
 
 entry = tk.Entry(root)
@@ -68,7 +68,7 @@ def results():
         result = eval(expression)
         entry.delete(0 , tk.END)
         entry.insert(tk.END , result)
-        calculations.append((expression, result))
+        classic_calculator_history.append((expression, result))
     except Exception as e:
         entry.delete(0 , tk.END)
         entry.insert(tk.END , f'Error: {e}')
@@ -108,7 +108,7 @@ for row in button:
             btn.pack(side = tk.LEFT , expand = True , fill = tk.BOTH)
             
         elif button_text == 'download history to csv. on desktop':
-            btn = tk.Button(button_frame , text=button_text , command = lambda: save_to_csv(calculations))
+            btn = tk.Button(button_frame , text=button_text , command = lambda: save_to_csv(classic_calculator_history))
             btn.pack(side = tk.LEFT , expand = True , fill = tk.BOTH)
                     
         elif button_text in ('+','-' ,'* ','/'):
