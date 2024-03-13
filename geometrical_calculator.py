@@ -4,101 +4,96 @@ import math
 
 geometrical_calculator_history = []
 
-class Circle:    
-    
-    def __init__(self , r):
-        self.r = r
-                
+class Circle:        
+    def __init__(self, radius):
+        self.radius = radius
+                     
     def calculate_area(self):
-        return math.pi * self.r ** 2
-    
+        return math.pi * self.radius ** 2
+       
     def calculate_circumference(self):
-        return 2 * math.pi * self.r
+        return 2 * math.pi * self.radius
     
-class Triangle:
-    
-    def __init__(self, a , b , c , h):
-        self.a = a
-        self.b = b
-        self.c = c
-        self.h = h
-        
+class Triangle:    
+    def __init__(self, side_a, side_b, side_c, height=None, base=None):
+        self.side_a = side_a
+        self.side_b = side_b
+        self.side_c = side_c
+        self.height = height
+        self.base = base
+               
     def calculate_area(self):
-        return 1/2 * self.b * self.h
-    
-    def calculate_circumference(self):
-        return self.a + self.b + self.c
+        if self.base is None or self.height is None:
+            raise ValueError("Data is required for calculations.")
+        return 0,5 * self.base * self.height
       
-class Square:
-    
-    def __init__(self , a):
-        self.a = a
-        
-    def calculate_area(self):
-        return self.a ** 2
-    
     def calculate_circumference(self):
-        return 4 * self.a
-        
-class Rectangle:
+        return self.side_a + self.side_b + self.side_c
     
-    def __init__(self , a , b):
-        self.a = a
-        self.b = b
-    
+class Square: 
+    def __init__(self, side_a):
+        self.side_a = side_a
+             
     def calculate_area(self):
-        return self.a * self.b
-    
+        return self.side_a ** 2
+     
+    def calculate_circumference(self):
+        return 4 * self.side_a
+       
+class Rectangle:    
+    def __init__(self, side_a, side_b):
+        self.side_a = side_a
+        self.side_b = side_b
+          
+    def calculate_area(self):
+        return self.side_a * self.side_b
+       
     def caluclate_circumference(self):
-        return (2 * self.a) + (2 * self.b)
+        return (2 * self.side_a) + (2 * self.side_b)
     
-class Rhombus:
+class Rhombus:    
+    def __init__(self, side_a, height=None):
+        self.side_a = side_a
+        self.height = height
+         
+    def calculate_area(self):
+        if self.height is None:
+            raise ValueError("Data is required for calculations.")
+        return self.side_a * self.height
+    def calculate_circumference(self):
+        return 4 * self.side_a
     
-    def __init__(self , a , h):
-        self.a = a
-        self.h = h
+class RegularPentagon:    
+    def __init__(self, side_a):
+        self.side_a = side_a
+        
+    def calculate_area(self):
+        return 0.25 * math.sqrt(5 * (5 + 2 * math.sqrt(5))) * self.side_a ** 2
+      
+    def calculate_circumference(self):
+        return 5 * self.side_a
+        
+class RegularHexagon:    
+    def __init__(self, side_a):
+        self.side_a = side_a
+            
+    def calculate_area(self):
+        return (3 * math.sqrt(3) / 2) * self.side_a ** 2
+        
+    def calculate_circumference(self):
+        return 6 * self.side_a
+    
+class RectangularPrism:    
+    def __init__(self, side_a, side_b, side_c):
+        self.side_a = side_a
+        self.side_b = side_b
+        self.side_c = side_c
     
     def calculate_area(self):
-        return self.a * self.h
+        return 2 * (self.side_a * self.side_b) + 2 * (self.side_a * self.side_c) + 2 * (self.side_b * self.side_c)
     
     def calculate_circumference(self):
-        return 4 * self.a
-    
-class RegularPentagon:
-    
-    def __init__(self , a):
-        self.a = a
-    
-    def calculate_area(self):
-        return 0.25 * math.sqrt(5 * (5 + 2 * math.sqrt(5))) * self.a ** 2
-    
-    def calculate_circumference(self):
-        return 5 * self.a
-    
-class RegularHexagon:
-    
-    def __init__(self , a):
-        self.a = a
-    
-    def calculate_area(self):
-        return (3 * math.sqrt(3) / 2) * self.a ** 2
-    
-    def calculate_circumference(self):
-        return 6 * self.a
-    
-class RectangularPrism:
-    
-    def __init__(self , a , b , c):
-        self.a = a
-        self.b = b
-        self.c = c
-    
-    def calcuclate_area(self):
-        return 2 * (self.a * self.b) + 2 * (self.a * self.c) + 2 * (self.b * self.c)
-    
-    def calculate_circumference(self):
-        return (4 * self.a) + (4 * self.b) + (4 * self.c)
-    
+        return (4 * self.side_a) + (4 * self.side_b) + (4 * self.side_c)
     
 def circle():
     while True:
@@ -122,10 +117,7 @@ def circle():
         except ValueError:
             print("Invalid choice. Please enter '1' for area or '2' for circumference.")
         else:
-            break       
-
-
-
+            break
 
 def triangle():
     while True:
@@ -176,7 +168,7 @@ def square():
         except ValueError:
             print("Invalid choice. Please enter '1' for area or '2' for circumference.")
         else:
-            break    
+            break
 
 def rectangle():
     while True:
@@ -288,7 +280,7 @@ def rectangular_prism():
                 b = float(input("Enter the length of the second side of the rectangular prism :"))
                 c = float(input("Enter the length of the third side of the rectangular prism :"))
                 rectangular_prism_obj = RectangularPrism(a , b , c)
-                area = rectangular_prism_obj.calcuclate_area()
+                area = rectangular_prism_obj.calculate_area()
                 geometrical_calculator_history.append((f"Rectangular prism area with sides {a}, {b}, {c}", area))
                 print("The AREA of the rectangular prism is:", area)
                 break
@@ -303,9 +295,7 @@ def rectangular_prism():
         except ValueError:
             print("Invalid choice. Please enter '1' for area or '2' for circumference.")
         else:
-            break
-            
-            
+            break     
 
 def choose_shape():
     while True:
@@ -336,40 +326,38 @@ def save_to_csv(calculations ,  file_name = 'Geometric calculat history.csv'):
         csv_writer = csv.writer(csvfile)
         for expression , result in calculations:
             csv_writer.writerow([f"{expression}={result}"])
-
-        
+      
 def main():
-    
     while True:
-    
-        user_choice = choose_shape() 
+            
+        user_choice = choose_shape()
     
         if user_choice == '1':
-            circle()  
+            circle()
         elif user_choice == '2':
             triangle()
         elif user_choice == '3':
-            square()    
+            square()  
         elif user_choice == '4':
-            rectangle()    
+            rectangle()
         elif user_choice == '5':
-            rhombus()    
+            rhombus()
         elif user_choice == '6':
-            regular_pentagon()    
+            regular_pentagon()
         elif user_choice == '7':
-            regular_hexagon()    
+            regular_hexagon()
         elif user_choice == '8':
             rectangular_prism()
         else:
             print("Invalid choice. Choose a number between 1 and 8.")
             continue
-            
+
         choice = input("What next?\n"
                        "To continue calculations - press 'continue'\n"
                        "To show history of calculations - press 'history'\n"
                        "To save history of calculations to csv. - press 'csv'\n"
                        "To quit - press 'quit'")
-            
+ 
         if choice.lower() == 'continue':
             continue
         elif choice.lower() == 'history':
@@ -384,9 +372,7 @@ def main():
         elif choice.lower() == 'quit':
             break
         else:
-             print("Invalid choice. Please enter 'display', 'history', 'csv' or 'quit'.")
-        
-    
+             print("Invalid choice. Please enter 'display', 'history', 'csv' or 'quit'.")  
     
 if __name__ == "__main__":
     main()
