@@ -295,8 +295,21 @@ def rectangular_prism():
         except ValueError:
             print("Invalid choice. Please enter '1' for area or '2' for circumference.")
         else:
-            break     
+            break
 
+def calculation_history():
+    print("Operation  geometrical history:")
+    for x in geometrical_calculator_history:
+        print(x)
+        
+def save_to_csv(calculations ,  file_name = 'Geometric calculat history.csv'):    
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    full_path = os.path.join(current_directory , file_name)
+    with open(full_path , 'w') as csvfile:
+        csv_writer = csv.writer(csvfile)
+        for expression , result in calculations:
+            csv_writer.writerow([f"{expression}={result}"])
+            
 def choose_shape():
     while True:
         print("Please choose a shape for operation:")
@@ -313,21 +326,8 @@ def choose_shape():
             return shape
         else:
             print("Invalid choice. Please enter a number between 1 and 8.")
-
-def show_history():
-    print("Operation  geometrical history:")
-    for x in geometrical_calculator_history:
-        print(x)
-        
-def save_to_csv(calculations ,  file_name = 'Geometric calculat history.csv'):    
-    current_directory = os.path.dirname(os.path.abspath(__file__))
-    full_path = os.path.join(current_directory , file_name)
-    with open(full_path , 'w') as csvfile:
-        csv_writer = csv.writer(csvfile)
-        for expression , result in calculations:
-            csv_writer.writerow([f"{expression}={result}"])
       
-def main():
+def geometrical_calculator():
     while True:
             
         user_choice = choose_shape()
@@ -361,7 +361,7 @@ def main():
         if choice.lower() == 'continue':
             continue
         elif choice.lower() == 'history':
-            show_history()
+            calculation_history()
             save_option = input("Do you want to save the  geometrical history of calculations to a csv. file? (y/n): ")
             if save_option.lower() == 'y':
                 save_to_csv(geometrical_calculator_history)
@@ -375,5 +375,5 @@ def main():
              print("Invalid choice. Please enter 'display', 'history', 'csv' or 'quit'.")  
     
 if __name__ == "__main__":
-    main()
-    save_to_csv
+    geometrical_calculator()
+    save_to_csv(geometrical_calculator_history)

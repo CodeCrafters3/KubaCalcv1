@@ -1,45 +1,29 @@
 from dotenv import load_dotenv
 from enum import IntEnum
 import os
-import classic_calculator_kuba
-import geometrical_calculator_kuba
+from classic_calculator import classic_calculator, classic_calculator_history
+from geometrical_calculator import geometrical_calculator, geometrical_calculator_history, calculation_history, save_to_csv
 
-history = []
 
-def get_name():
-    load_dotenv()
-    name = os.getenv('USER_NAME')
-    return name
+def main_menu():
+    print("Choose calculator:")
+    print("1. Classic calculator")
+    print("2. Geometrical calculator")
+    print("3. Show operations history")
+    print("4. Save history of operations to csv. file")
+    print("5. Exit")
+    choice = input("Number of the type of calculator you want to use: ")
 
-def main():
-    possibilities = ['Classic_calculator', 'Geometrical_calculator', 'Show_operations_history', 'Exit']
-    Possibilities_menu = IntEnum('Possibilities_menu', possibilities)
-
-    name = get_name()
-    print(f'Welcome in my calculator {name}!')
-
-    while True:
-        print("Choose calculator type: \n"
-              "1 - classic calculator\n"
-              "2 - geometrical calculator\n"
-              "3 - show operations history\n"
-              "4 - exit")
-        
-        choice = int(input("Number of the type of calculator you want to use: "))
-
-        if choice == Possibilities_menu.Classic_calculator:
-            classic_calculator_kuba.classic_calculator_kuba(history)
-        elif choice == Possibilities_menu.Geometrical_calculator:
-            geometrical_calculator_kuba.geometrical_calculator(history)
-        elif choice == Possibilities_menu.Show_operations_history:
-            print("History of operations: ")
-            for operation in history:
-                print(operation)    
-        elif choice == Possibilities_menu.Exit:
-            print("Calculator has been closed")
-            break
-        else:
-            print("There isn't such an operation, choose other one.")
+    if choice == "1":
+        classic_calculator()
+    elif choice == "2":
+        geometrical_calculator()
+    elif choice == "3":
+        calculation_history()
+    elif choice == "4":
+        save_to_csv(classic_calculator_history, geometrical_calculator_history)
+    else:
+        print("There isn't such an operation, choose other one.")
 
 if __name__ == "__main__":
-    main()
+    main_menu()
