@@ -302,7 +302,7 @@ def calculation_history():
     for x in geometrical_calculator_history:
         print(x)
         
-def save_to_csv(calculations ,  file_name = 'Geometric calculat history.csv'):    
+def save_to_csv_geometrical(calculations ,  file_name = 'Geometric calculat history.csv'):    
     current_directory = os.path.dirname(os.path.abspath(__file__))
     full_path = os.path.join(current_directory , file_name)
     with open(full_path , 'w') as csvfile:
@@ -364,11 +364,11 @@ def geometrical_calculator():
             calculation_history()
             save_option = input("Do you want to save the  geometrical history of calculations to a csv. file? (y/n): ")
             if save_option.lower() == 'y':
-                save_to_csv(geometrical_calculator_history)
+                save_to_csv_geometrical(geometrical_calculator_history)
             else:
                 continue
         elif choice.lower() == 'csv':
-            save_to_csv(geometrical_calculator_history)
+            save_to_csv_geometrical(geometrical_calculator_history)
         elif choice.lower() == 'quit':
             break
         else:
@@ -376,4 +376,4 @@ def geometrical_calculator():
     
 if __name__ == "__main__":
     geometrical_calculator()
-    save_to_csv(geometrical_calculator_history)
+    save_to_csv_geometrical(geometrical_calculator_history)

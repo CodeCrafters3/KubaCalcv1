@@ -1,47 +1,64 @@
 from dotenv import load_dotenv
 from enum import Enum
 import os
-from classic_calculator import classic_calculator, classic_calculator_history
-from geometrical_calculator import geometrical_calculator, geometrical_calculator_history, calculation_history, save_to_csv
+from classic_calculator import classic_calculator, classic_calculator_history, save_to_csv_classic
+from geometrical_calculator import geometrical_calculator, geometrical_calculator_history, save_to_csv_geometrical
 
 class CalculatorChoice(Enum):
     Classic = 1
     Geometrical = 2
-    Show_history = 3
-    Save_to_csv = 4
-    exit = 5
+    Show_classic_calculation_history = 3
+    Show_geometerical_calculation_history = 4
+    Save_to_csv_classic_calculations = 5
+    Save_to_csv_geometrical_calculations = 6
+    exit = 7
     
 def get_calculator_choice():
     while True:
         try:
             choice = int(input("Number of the type of calculator you want to use: "))
-            if 1 <= choice <= 5:
-                return CalculatorChoice
+            if 1 <= choice <= 7:
+                return choice
             else:
-                print("Invalid choice. Please enter a number between 1 and 5.")
+                print("Invalid choice. Please enter a number between 1 and 7.")
         except ValueError:
             print("Invalid input. Please enter a number.")
 
 def main_menu():
-    print("Choose calculator:")
-    print("1. Classic calculator")
-    print("2. Geometrical calculator")
-    print("3. Show operations history")
-    print("4. Save history of operations to csv. file")
-    print("5. Exit")
-
-    calculator_choice = get_calculator_choice
     
-    if calculator_choice == CalculatorChoice.Classic:
-        classic_calculator()
-    elif calculator_choice == CalculatorChoice.Geometrical:
-        geometrical_calculator()
-    elif calculator_choice == CalculatorChoice.Show_history:
-        calculation_history()
-    elif calculator_choice == CalculatorChoice.Save_to_csv:
-        save_to_csv()
-    else:
-        print("Exiting...")
+    while True:
+        print("Choose calculator:")
+        print("1. Classic calculator")
+        print("2. Geometrical calculator")
+        print("3. Show classic calculator operations history")
+        print("4. Show classic geometrical operations history")
+        print("5. Save history of classic calculator operations to csv. file")
+        print("6. Save history of geometrical calculator operations to csv. file")
+        print("7. Exit")
+
+        calculator_choice = get_calculator_choice()
+        
+        if calculator_choice == 1:
+            classic_calculator()
+        elif calculator_choice == 2:
+            geometrical_calculator()
+        elif calculator_choice == 3:
+            print("Classic Calculator History:")
+            for operation in classic_calculator_history:
+                print(operation)
+        elif calculator_choice == 4:
+            print("Geometrical Calculator History:")
+            for operation in geometrical_calculator_history:
+                print(operation)
+        elif calculator_choice == 5:
+            save_to_csv_classic(classic_calculator_history)
+        elif calculator_choice == 6:
+            save_to_csv_geometrical(geometrical_calculator_history)
+        elif calculator_choice == 7:
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 7.")
 
 if __name__ == "__main__":
     main_menu()
