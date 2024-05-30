@@ -1,4 +1,3 @@
-# main.py
 from dotenv import load_dotenv
 from enum import Enum
 import os
