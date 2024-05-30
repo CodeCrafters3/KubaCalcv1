@@ -4,97 +4,98 @@ import math
 
 geometrical_calculator_history = []
 
-class Circle:        
+class Circle:
     def __init__(self, radius):
         self.radius = radius
-                     
+
     def calculate_area(self):
         return math.pi * self.radius ** 2
-       
+
     def calculate_circumference(self):
         return 2 * math.pi * self.radius
-    
-class Triangle:    
+
+class Triangle:
     def __init__(self, side_a, side_b, side_c, height=None, base=None):
         self.side_a = side_a
         self.side_b = side_b
         self.side_c = side_c
         self.height = height
         self.base = base
-               
+
     def calculate_area(self):
         if self.base is None or self.height is None:
             raise ValueError("Data is required for calculations.")
-        return 0,5 * self.base * self.height
-      
+        return 0.5 * self.base * self.height
+
     def calculate_circumference(self):
         return self.side_a + self.side_b + self.side_c
-    
-class Square: 
+
+class Square:
     def __init__(self, side_a):
         self.side_a = side_a
-             
+
     def calculate_area(self):
         return self.side_a ** 2
-     
+
     def calculate_circumference(self):
         return 4 * self.side_a
-       
-class Rectangle:    
+
+class Rectangle:
     def __init__(self, side_a, side_b):
         self.side_a = side_a
         self.side_b = side_b
-          
+
     def calculate_area(self):
         return self.side_a * self.side_b
-       
-    def caluclate_circumference(self):
+
+    def calculate_circumference(self):
         return (2 * self.side_a) + (2 * self.side_b)
-    
-class Rhombus:    
+
+class Rhombus:
     def __init__(self, side_a, height=None):
         self.side_a = side_a
         self.height = height
-         
+
     def calculate_area(self):
         if self.height is None:
             raise ValueError("Data is required for calculations.")
         return self.side_a * self.height
+
     def calculate_circumference(self):
         return 4 * self.side_a
-    
-class RegularPentagon:    
+
+class RegularPentagon:
     def __init__(self, side_a):
         self.side_a = side_a
-        
+
     def calculate_area(self):
         return 0.25 * math.sqrt(5 * (5 + 2 * math.sqrt(5))) * self.side_a ** 2
-      
+
     def calculate_circumference(self):
         return 5 * self.side_a
-        
-class RegularHexagon:    
+
+class RegularHexagon:
     def __init__(self, side_a):
         self.side_a = side_a
-            
+
     def calculate_area(self):
         return (3 * math.sqrt(3) / 2) * self.side_a ** 2
-        
+
     def calculate_circumference(self):
         return 6 * self.side_a
-    
-class RectangularPrism:    
+
+class RectangularPrism:
     def __init__(self, side_a, side_b, side_c):
         self.side_a = side_a
         self.side_b = side_b
         self.side_c = side_c
-    
+
     def calculate_area(self):
         return 2 * (self.side_a * self.side_b) + 2 * (self.side_a * self.side_c) + 2 * (self.side_b * self.side_c)
-    
+
     def calculate_circumference(self):
         return (4 * self.side_a) + (4 * self.side_b) + (4 * self.side_c)
-    
+
 def circle():
     while True:
         try:
@@ -128,16 +129,16 @@ def triangle():
             if choose == '1':
                 a = float(input("Enter the base of the triangle: "))
                 h = float(input("Enter the height of the triangle: "))
-                triangle_obj = Triangle(a , 0 , 0 ,h)
+                triangle_obj = Triangle(a, 0, 0, h)
                 area = triangle_obj.calculate_area()
                 geometrical_calculator_history.append((f"Triangle area with base {a} and height {h}", area))
                 print("The AREA of the triangle is:", area)
                 break
             elif choose == '2':
-                a = float(input("Enter the length of the first side of the triangle :"))
-                b = float(input("Enter the length of the second side of the triangle :"))
-                c = float(input("Enter the length of the third side of the triangle :"))
-                triangle_obj = Triangle(a , b , c , 0)
+                a = float(input("Enter the length of the first side of the triangle: "))
+                b = float(input("Enter the length of the second side of the triangle: "))
+                c = float(input("Enter the length of the third side of the triangle: "))
+                triangle_obj = Triangle(a, b, c, 0)
                 circumference = triangle_obj.calculate_circumference()
                 geometrical_calculator_history.append((f"Triangle circumference with sides {a}, {b}, and {c}", circumference))
                 print("The CIRCUMFERENCE of the triangle is:", circumference)
@@ -145,7 +146,7 @@ def triangle():
             print("Invalid choice. Please enter '1' for area or '2' for circumference.")
         else:
             break
-            
+
 def square():
     while True:
         try:
@@ -179,7 +180,7 @@ def rectangle():
             if choose == '1':
                 a = float(input("Enter the length of the first side of the rectangle: "))
                 b = float(input("Enter the length of the second side of the rectangle: "))
-                rectangle_obj = Rectangle(a , b)
+                rectangle_obj = Rectangle(a, b)
                 area = rectangle_obj.calculate_area()
                 geometrical_calculator_history.append((f"Rectangle area with sides {a} and {b}", area))
                 print("The AREA of the rectangle is:", area)
@@ -187,8 +188,8 @@ def rectangle():
             elif choose == '2':
                 a = float(input("Enter the length of the first side of the rectangle: "))
                 b = float(input("Enter the length of the second side of the rectangle: "))
-                rectangle_obj = Rectangle(a , b)
-                circumference = rectangle_obj.caluclate_circumference()
+                rectangle_obj = Rectangle(a, b)
+                circumference = rectangle_obj.calculate_circumference()
                 geometrical_calculator_history.append((f"Rectangle circumference with sides {a} and {b}", circumference))
                 print("The CIRCUMFERENCE of the rectangle is:", circumference)
         except ValueError:
@@ -203,16 +204,16 @@ def rhombus():
             print("To calculate THE CIRCUMFERENCE of rhombus (4 * a) - press '2'")
             choose = input("Choose operation...")
             if choose == '1':
-                a = float(input("Enter the length of the  side of the rhombus: "))
+                a = float(input("Enter the length of the side of the rhombus: "))
                 h = float(input("Enter the height of the rhombus: "))
-                rhombus_obj = Rhombus(a , h)
+                rhombus_obj = Rhombus(a, h)
                 area = rhombus_obj.calculate_area()
                 geometrical_calculator_history.append((f"Rhombus area with base {a} and height {h}", area))
                 print("The AREA of the rhombus is:", area)
                 break
             elif choose == '2':
                 a = float(input("Enter the length of the side of the rhombus: "))
-                rhombus_obj = Rhombus(a , 0)
+                rhombus_obj = Rhombus(a, 0)
                 circumference = rhombus_obj.calculate_circumference()
                 geometrical_calculator_history.append((f"Rhombus circumference with base {a}", circumference))
                 print("The CIRCUMFERENCE of the rhombus is:", circumference)
@@ -235,10 +236,10 @@ def regular_pentagon():
                 print("The AREA of the regular pentagon is:", area)
                 break
             elif choose == '2':
-                a = float(input("Enter the length of the  side of the regular pentagon: "))
+                a = float(input("Enter the length of the side of the regular pentagon: "))
                 regular_pentagon_obj = RegularPentagon(a)
                 circumference = regular_pentagon_obj.calculate_circumference()
-                geometrical_calculator_history.append((f"Regular pentagon circumference with side {a}", circumference))    
+                geometrical_calculator_history.append((f"Regular pentagon circumference with side {a}", circumference))
                 print("The CIRCUMFERENCE of the regular pentagon is:", circumference)
         except ValueError:
             print("Invalid choice. Please enter '1' for area or '2' for circumference.")
@@ -259,7 +260,7 @@ def regular_hexagon():
                 print("The AREA of the regular hexagon is:", area)
                 break
             elif choose == '2':
-                a = float(input("Enter the length of the  side of the regular hexagon: "))
+                a = float(input("Enter the length of the side of the regular hexagon: "))
                 regular_hexagon_obj = RegularHexagon(a)
                 circumference = regular_hexagon_obj.calculate_circumference()
                 geometrical_calculator_history.append((f"Regular hexagon circumference with side {a}", circumference))
@@ -268,27 +269,27 @@ def regular_hexagon():
             print("Invalid choice. Please enter '1' for area or '2' for circumference.")
         else:
             break
-    
+
 def rectangular_prism():
     while True:
-        try: 
+        try:
             print("To calculate THE AREA of rectangular prism (2 * (a * b) + 2 * (a * c) + 2 * (b * c)) - press '1'")
             print("To calculate THE CIRCUMFERENCE of rectangular prism ((4 * a) + (4 * b) + (4 * c)) - press '2'")
             choose = input("Choose operation...")
             if choose == '1':
-                a = float(input("Enter the length of the first side of the rectangular prism :"))
-                b = float(input("Enter the length of the second side of the rectangular prism :"))
-                c = float(input("Enter the length of the third side of the rectangular prism :"))
-                rectangular_prism_obj = RectangularPrism(a , b , c)
+                a = float(input("Enter the length of the first side of the rectangular prism: "))
+                b = float(input("Enter the length of the second side of the rectangular prism: "))
+                c = float(input("Enter the length of the third side of the rectangular prism: "))
+                rectangular_prism_obj = RectangularPrism(a, b, c)
                 area = rectangular_prism_obj.calculate_area()
                 geometrical_calculator_history.append((f"Rectangular prism area with sides {a}, {b}, {c}", area))
                 print("The AREA of the rectangular prism is:", area)
                 break
             elif choose == '2':
-                a = float(input("Enter the length of the first side of the rectangular prism :"))
-                b = float(input("Enter the length of the second side of the rectangular prism :"))
-                c = float(input("Enter the length of the third side of the rectangular prism :"))
-                rectangular_prism_obj = RectangularPrism(a , b , c)
+                a = float(input("Enter the length of the first side of the rectangular prism: "))
+                b = float(input("Enter the length of the second side of the rectangular prism: "))
+                c = float(input("Enter the length of the third side of the rectangular prism: "))
+                rectangular_prism_obj = RectangularPrism(a, b, c)
                 circumference = rectangular_prism_obj.calculate_circumference()
                 geometrical_calculator_history.append((f"Rectangular prism circumference with sides {a}, {b}, {c}", circumference))
                 print("The CIRCUMFERENCE of the rectangular prism is:", circumference)
@@ -298,18 +299,18 @@ def rectangular_prism():
             break
 
 def calculation_history():
-    print("Operation  geometrical history:")
+    print("Operation geometrical history:")
     for x in geometrical_calculator_history:
         print(x)
-        
-def save_to_csv_geometrical(calculations ,  file_name = 'Geometric calculat history.csv'):    
+
+def save_to_csv_geometrical(calculations, file_name='Geometric calculat history.csv'):
     current_directory = os.path.dirname(os.path.abspath(__file__))
-    full_path = os.path.join(current_directory , file_name)
-    with open(full_path , 'w') as csvfile:
+    full_path = os.path.join(current_directory, file_name)
+    with open(full_path, 'w') as csvfile:
         csv_writer = csv.writer(csvfile)
-        for expression , result in calculations:
+        for expression, result in calculations:
             csv_writer.writerow([f"{expression}={result}"])
-            
+
 def choose_shape():
     while True:
         print("Please choose a shape for operation:")
@@ -326,18 +327,17 @@ def choose_shape():
             return shape
         else:
             print("Invalid choice. Please enter a number between 1 and 8.")
-      
+
 def geometrical_calculator():
     while True:
-            
         user_choice = choose_shape()
-    
+
         if user_choice == '1':
             circle()
         elif user_choice == '2':
             triangle()
         elif user_choice == '3':
-            square()  
+            square()
         elif user_choice == '4':
             rectangle()
         elif user_choice == '5':
@@ -357,12 +357,12 @@ def geometrical_calculator():
                        "To show history of calculations - press 'history'\n"
                        "To save history of calculations to csv. - press 'csv'\n"
                        "To quit - press 'quit'")
- 
+
         if choice.lower() == 'continue':
             continue
         elif choice.lower() == 'history':
             calculation_history()
-            save_option = input("Do you want to save the  geometrical history of calculations to a csv. file? (y/n): ")
+            save_option = input("Do you want to save the geometrical history of calculations to a csv. file? (y/n): ")
             if save_option.lower() == 'y':
                 save_to_csv_geometrical(geometrical_calculator_history)
             else:
@@ -372,8 +372,7 @@ def geometrical_calculator():
         elif choice.lower() == 'quit':
             break
         else:
-             print("Invalid choice. Please enter 'display', 'history', 'csv' or 'quit'.")  
-    
-if __name__ == "__main__":
+            print("Invalid choice. Please enter 'display', 'history', 'csv' or 'quit'.")
+
+def run_geometrical_calculator():
     geometrical_calculator()
-    save_to_csv_geometrical(geometrical_calculator_history)

@@ -1,8 +1,9 @@
+# main.py
 from dotenv import load_dotenv
 from enum import Enum
 import os
-from classic_calculator import classic_calculator, classic_calculator_history, save_to_csv_classic
-from geometrical_calculator import geometrical_calculator, geometrical_calculator_history, save_to_csv_geometrical
+from classic_calculator import run_classic_calculator
+from geometrical_calculator import run_geometrical_calculator
 
 class CalculatorChoice(Enum):
     Classic = 1
@@ -12,7 +13,7 @@ class CalculatorChoice(Enum):
     Save_to_csv_classic_calculations = 5
     Save_to_csv_geometrical_calculations = 6
     exit = 7
-    
+
 def get_calculator_choice():
     while True:
         try:
@@ -25,7 +26,6 @@ def get_calculator_choice():
             print("Invalid input. Please enter a number.")
 
 def main_menu():
-    
     while True:
         print("Choose calculator:")
         print("1. Classic calculator")
@@ -37,11 +37,11 @@ def main_menu():
         print("7. Exit")
 
         calculator_choice = get_calculator_choice()
-        
+
         if calculator_choice == 1:
-            classic_calculator()
+            run_classic_calculator()
         elif calculator_choice == 2:
-            geometrical_calculator()
+            run_geometrical_calculator()
         elif calculator_choice == 3:
             print("Classic Calculator History:")
             for operation in classic_calculator_history:
