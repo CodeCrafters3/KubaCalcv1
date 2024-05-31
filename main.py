@@ -1,8 +1,8 @@
 from dotenv import load_dotenv
 from enum import Enum
 import os
-from classic_calculator import run_classic_calculator
-from geometrical_calculator import run_geometrical_calculator
+from classic_calculator import run_classic_calculator, classic_calculator_history, save_to_csv_classic
+from geometrical_calculator import run_geometrical_calculator, geometrical_calculator_history, save_to_csv_geometrical
 
 class CalculatorChoice(Enum):
     Classic = 1
